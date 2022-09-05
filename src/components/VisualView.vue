@@ -7,7 +7,11 @@
           delay: 2000,
           disableOnIteraction: false,
         }"
-        v-bind:loop = "true"
+        v-bind:loop ="true"
+        :pagination = "{
+          el:'.sw-visual-pg',
+          clickable: 'true'
+        }"
         v-on:swiper="onSwiper"
         v-on:slideChange="onSlideChange"
         class="sw-visual"
@@ -23,6 +27,10 @@
           />
         </swiper-slide>
 
+        <!-- 슬라이드 콘트롤 -->
+        <div class="sw-visual-control">
+          <div class="sw-visual-pg"></div>
+        </div>
 
     </Swiper>
 
@@ -32,9 +40,10 @@
 <script>
 import { ref } from "vue";
 
-import { Autoplay } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/vue';
+import { Autoplay,Pagination } from 'swiper';
+import { Swiper, SwiperSlide,  } from 'swiper/vue';
 import 'swiper/css';
+
 
 import VisualList from '@/components/VisualList.vue';
 export default {
@@ -87,8 +96,9 @@ export default {
     return  {
       onSwiper,
       onSlideChange,
-      modules: [Autoplay],
-      slideData
+      modules: [Autoplay, Pagination],
+      slideData,
+      
     }
   }
 
