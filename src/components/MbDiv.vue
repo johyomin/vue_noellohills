@@ -12,9 +12,9 @@
           <li v-for="(item, index) in mbmenu" v-bind:key="index">
             <span class="mb-mainmenu" v-if=" item.menuType == 'S' ">{{item.mainText}}</span>
             <a v-bind:href="item.mainLink" class="mb-mainmenu" v-if=" item.menuType == 'A' ">{{item.mainText}}</a>
-            
-            <ul class="mb-submenu" v-if="item.menuType == 'S'" >
-              
+
+            <ul class="mb-submenu" v-if="item.menuType == 'S'">
+
               <li v-for="(subitem, subindex) in item.subArr" v-bind:key="subindex">
                 <a v-bind:href="subitem.link">{{subitem.title}}</a>
               </li>
@@ -36,7 +36,9 @@
   } from 'vue';
 
   import $ from 'jquery';
-  import { useStore } from 'vuex';
+  import {
+    useStore
+  } from 'vuex';
 
   export default {
 
@@ -46,7 +48,7 @@
       // 현재는 store 변수를 통해서 접근하여 기능을 실행한다.
       const store = useStore();
       // store 의 state (데이터) 는 수시로 변경되므로 computed 로 감시한다.
-      const mbmenu = computed( () => store.getters.getMbMenuData );
+      const mbmenu = computed(() => store.getters.getMbMenuData);
       // store 의 action 호출
       // store.dispatch('액션메소드')
 
@@ -54,6 +56,12 @@
       onUpdated(() => {
         // 모바일 메뉴
         let mb_div = $('.mb-div');
+
+        // 모바일 닫기 버튼 기능
+        let mb_close = $('.mb-close');
+        mb_close.click(function () {
+          mb_div.hide();
+        });
 
         // 모바일 보기 버튼 기능
         let mb_bt = $('.mb-bt');
